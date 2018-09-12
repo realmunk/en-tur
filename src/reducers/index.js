@@ -2,6 +2,7 @@ import ActionTypes from '../actions/types'
 
 const initialState = {
     lastUpdated: null,
+    transportMode: null,
     id: null,
     name: null,
     estimatedCalls: []

@@ -6,6 +6,7 @@ function getEstimatedCallsForStop(stopPlace = "NSR:StopPlace:4000", startTime = 
             stopPlace(id: "${stopPlace}") {
                 id
                 name 
+                transportMode
                 estimatedCalls(startTime: "${startTime}", timeRange: 72100, numberOfDepartures: 10) {
                     realtime
                     aimedArrivalTime

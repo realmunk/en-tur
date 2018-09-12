@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
-import moment from 'moment';
 
 import { connect } from 'react-redux';
 
 import StopPlace from './components/stop-place'
 import EstimatedCalls from './components/estimated-calls'
+
 import { estimatedCallsRoutine } from './actions';
 
-import './App.css'
+import { ThemeProvider } from 'styled-components';
+import Theme from './styles/theme';
+import Grid from './styles/grid-system';
 
 class App extends Component {
 
@@ -17,20 +19,23 @@ class App extends Component {
 
   render() {
     
-    const { lastUpdated, estimatedCalls, name } = this.props;
+    const { lastUpdated, estimatedCalls, name, transportMode } = this.props;
 
-    return (<div className="App">
-      <StopPlace name={name} lastUpdated={lastUpdated}/>
-      <main className="mainList">
-        <EstimatedCalls calls={estimatedCalls} />
-      </main>
-    </div>);
+    return (
+      <ThemeProvider theme={Theme}>
+        <Grid>
+          <StopPlace name={name} lastUpdated={lastUpdated} transportMode={transportMode} />
+          <EstimatedCalls calls={estimatedCalls} />
+        </Grid>
+      </ThemeProvider>
+    );
   }
 }
 
 function mapStateToProps(store) {
   return {
     lastUpdated: store.lastUpdated,
+    transportMode: store.transportMode,
     name: store.name,
     estimatedCalls: store.estimatedCalls
   }
