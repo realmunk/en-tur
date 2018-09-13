@@ -6,21 +6,26 @@ import styled from 'styled-components';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { faBus as Bus, faTrain as Train, faShip as Boat, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
+import Delay from '../styles/delay';
+import Departure from '../styles/departure';
 
 const Header = styled.header`    
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    background-color: #242424;
+    border-top: 4px solid ${props => props.theme.color.warning};
+    background-color: ${props => props.theme.bg.secondary};
     color: white;
-    font-size: 24px;
+    font-size: 18px;
     font-family: 'Roboto';
     padding: ${props => props.theme.space.md} ${props => props.theme.space.xs};
 `;
 
 const LastUpdated = styled.div`
+    display: flex;
     align-self: flex-end;
+    font-size: 24px;
+    font-weight: bold;
     margin-right: ${props => props.theme.space.sm};
 `;
 
@@ -30,8 +35,9 @@ const StopPlace = styled.div`
     align-items: center;
     justify-content: center;
 `;
+
 const IconWrapper = styled.div`
-    width: 56px;
+    width: 40px;
     text-align: center;
 `;
 
@@ -67,8 +73,8 @@ export default ({ name, lastUpdated, type }) => {
                 <Name>{name}</Name>
             </StopPlace>
             <LastUpdated>
-                {diff > 1 && <Icon size="xs" icon={faExclamationTriangle}/> }
-                {moment(lastUpdated).format('HH:mm')}
+                <Departure>{moment(lastUpdated).format('HH:mm')}</Departure>
+                <Delay>{diff > 1 && <Icon size="xs" icon={faExclamationTriangle}/> }</Delay>
             </LastUpdated>
     </Header>
 }

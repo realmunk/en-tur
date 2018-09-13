@@ -2,11 +2,12 @@
 const DEFAULT_SIZE = 4;
 
 const Theme = {
+    base: DEFAULT_SIZE,
     space: {
         xs: `${DEFAULT_SIZE}px`,
         sm: `${DEFAULT_SIZE * 2}px`,
         md: `${DEFAULT_SIZE * 3}px`,
-        lg: `${DEFAULT_SIZE * 4}px`
+        lg: `${DEFAULT_SIZE * 8}px`
     },
     color: {
         primary: "#4A4A4A",
@@ -14,7 +15,8 @@ const Theme = {
         secondary: "#EEEEEE"
     },
     bg: {
-        primary: "#EEEEEE"
+        primary: "#EEEEEE",
+        secondary: "#242424"
     }
 };
 

@@ -5,14 +5,15 @@ const initialState = {
     transportMode: null,
     id: null,
     name: null,
-    estimatedCalls: []
+    estimatedCalls: {}
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.ESTIMATED_CALLS_FETCH_SUCCEEDED:
             return {
-                ...action.payload
+                ...action.body,
+                lastUpdated: Date.now()
             }
         default:
             return state

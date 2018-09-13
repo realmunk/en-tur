@@ -3,6 +3,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+import Delay from '../styles/delay';
+import DepartureWrapper from '../styles/departure';
 
 const Departure = styled.div`
     text-align: right;
@@ -13,20 +15,11 @@ const Departure = styled.div`
     padding: ${props => props.theme.space.xs};
 `;
 
-const Delay = styled.div`
-    margin-right: 4px;
-    width: 32px;
-    text-align: right;
-    color: ${props => props.theme.color.warning};
-`
+export default ({ expected, delay }) => {
 
-export default ({ expected, arrival }) => {
-    let exp = moment(expected);
-    let aim = moment(arrival);
-    let diff = exp.diff(aim, 'minutes');
 
     return <Departure>
-        <strong>{moment(expected).fromNow()}</strong>
-        <Delay>{diff > 1 && `+${diff}`}</Delay>
+        <DepartureWrapper><strong>{moment(expected).fromNow()}</strong></DepartureWrapper>
+        <Delay>{delay > 1 && `+${delay}`}</Delay>
     </Departure>
 }

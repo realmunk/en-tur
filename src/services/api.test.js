@@ -1,4 +1,4 @@
-import { getEstimatedCallsForStop } from './api';
+import api from './api';
 
 import fetchMock from 'fetch-mock';
 
@@ -18,17 +18,33 @@ API'et har en kunstig begrensning (begrensningen er ikke i API'et i virkelighete
   - Det er kun det siste kallet som legges i køen som skal sendes til API'et når responsen fra det foregående kallet returneres, resten kan forkastes.
 */
 
-describe('Estimated Calls for Stop Place', () => {
+describe('Estimated Calls for Stop Place', () => {    
 
-    fetchMock.mock('path:/journeyplanner/2.0/index/graphql', (url, options) => {
-        return delay(1000).then(() => {
-            return MOCK_RESPONSE
+    it('is calling the correct endpoint', async () => {
+
+        fetchMock.mock('path:/journeyplanner/2.0/index/graphql', (url, options) => {
+            return delay(1000).then(() => {
+                return MOCK_RESPONSE
+            })
         })
+
+        await api.getEstimatedCallsForStop();
+        expect(fetchMock.calls('path:/journeyplanner/2.0/index/graphql').length).toBe(1)
+        fetchMock.restore();
     })
 
-    it('is working as it should', async () => {
-        await getEstimatedCallsForStop();
-        expect(fetchMock.calls('path:/journeyplanner/2.0/index/graphql').length).toBe(1)
-    })
+    // it('throws error on 500', async () => {
+
+    //     fetchMock.mock('path:/journeyplanner/2.0/index/graphql', (url, options) => {
+    //         return delay(1000).then(() => {
+    //             return 500
+    //         })
+    //     })
+
+    //     await api.getEstimatedCallsForStop();
+    //     expect(fetchMock.calls('path:/journeyplanner/2.0/index/graphql').length).toBe(1)
+    //     fetchMock.restore();
+    // })
+
 })
 

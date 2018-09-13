@@ -6,12 +6,7 @@ import styled from 'styled-components';
 import Line from './line';
 import Departure from './departure';
 
-
-moment.relativeTimeThreshold('ss', 9);
-moment.relativeTimeThreshold('m', 10);
-
-
-const EstimatedCalls = styled.div`    
+const Column = styled.div`    
     display: flex;
     flex-direction: column;
 `;
@@ -21,6 +16,7 @@ const Ul = styled.ul`
     display: block;
     margin: 0;
     padding: 0;
+    margin-top: ${props => props.theme.base * 2 * props.waitTime}px;
 `;
 
 const Li = styled.li`    
@@ -29,9 +25,8 @@ const Li = styled.li`
     justify-content: space-between;
     align-items: center;
     padding: ${props => props.theme.space.xs};
-
     /* BG: */
-    background: #FFFFFF;
+    background: rgba(255, 255, 255, 0.8);
 
     border-bottom: 1px solid ${props => props.theme.color.secondary};    
     &:first-child {
@@ -39,16 +34,23 @@ const Li = styled.li`
     }
 `;
 
-export default ({ calls }) => {
-    return <EstimatedCalls>
-        <Ul>
-            {calls.map((call => {
-                return <Li key={call.serviceJourney.line.publicCode + Math.random() * 100} className="estimated-call">
-                    <Line publicCode={call.serviceJourney.line.publicCode} name={call.destinationDisplay.frontText} />
-                    <Departure expected={call.expectedArrivalTime} aimed={call.aimedArrivalTime} />
-                    </Li>
-                }
-            ))}
-        </Ul>
-    </EstimatedCalls>
-}
+export default ({estimatedCalls}) => {
+    return (
+        <Column>
+            {Object.keys(estimatedCalls).map(group => {
+                return <Ul waitTime={group} key={group}>
+                    {estimatedCalls[group].map(call => {
+
+                        let expected = moment(call.expectedArrivalTime);
+                        let aimed = moment(call.aimedArrivalTime);
+                        let delay = expected.diff(aimed, 'minutes');
+
+                        return <Li key={call.serviceJourney.line.publicCode + Math.random() * 100}>
+                            <Line publicCode={call.serviceJourney.line.publicCode} name={call.destinationDisplay.frontText} />
+                            <Departure expected={expected} aimed={aimed} delay={delay} />
+                        </Li>
+                    })}
+                </Ul>
+            })}
+        </Column>);
+}; 

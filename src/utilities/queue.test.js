@@ -12,7 +12,7 @@ describe('LIFO Queue', () => {
         testQueue.enqueue(2);
         
         let a = testQueue.enqueue(3);
-        expect(a).toEqual([3, 2, 1]);
+        expect(a).toEqual([1, 2, 3]);
     })
 
     it('dequeuing an element removes all elements in queue', async () => {

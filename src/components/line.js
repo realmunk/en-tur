@@ -10,10 +10,11 @@ const Line = styled.div`
 `;
 
 const PublicCode = styled.div`
-    width: 56px;
+    width: 40px;
+    height: 40px;
     font-size: 18px;
     font-weight: bold;
-    padding: ${props => props.theme.space.sm};
+    padding: ${props => props.theme.space.sm} 0;
     background: ${props => props.theme.bg.primary};
 `;
 
