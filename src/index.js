@@ -8,6 +8,7 @@ import App from './App';
 import osloCentralStation from './images/oslo-central.jpg';
 
 import { injectGlobal } from 'styled-components';
+import registerServiceWorker from './registerServiceWorker';
 
 injectGlobal`
   html, body {
@@ -33,3 +34,4 @@ ReactDOM.render(
         <App />
     </Provider>, 
     document.getElementById('root'));
+registerServiceWorker();
