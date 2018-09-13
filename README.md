@@ -1,4 +1,4 @@
-# en-tur
+# Jernbanetorget
 
 Opionated create-react-app for showing departures from Jernbanetorget with the GraphQL Api from [En-tur](https://www.entur.org/).
 
