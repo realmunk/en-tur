@@ -18,7 +18,7 @@ const Header = styled.header`
     color: white;
     font-size: 18px;
     font-family: 'Roboto';
-    padding: ${props => props.theme.space.md} ${props => props.theme.space.xs};
+    padding: ${props => props.theme.space.md + " " + props.theme.space.xs};
 `;
 
 const LastUpdated = styled.div`

@@ -1,5 +1,5 @@
 import { delay } from 'redux-saga'
-import { call, all, put, spawn, takeLatest } from 'redux-saga/effects'
+import { call, all, put, takeLatest } from 'redux-saga/effects'
 
 import moment from 'moment';
 
