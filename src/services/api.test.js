@@ -9,14 +9,6 @@ let delay = (delayMs) => {
         setTimeout(resolve, delayMs)
     })
 }
-/*
-  
-API'et har en kunstig begrensning (begrensningen er ikke i API'et i virkeligheten, dette er kun et fiktivt problem) som gjør at klienten ikke kan sende kall til API'et før klienten har fått svar på det forrige kallet som ble sendt. 
-  
-  Derfor må du implementere køfunksjonalitet som gjør følgende:
-  - Hvis et kall har blitt sendt og ikke fått en respons skal påfølgende kall fra klienten legges i en kø og sendes til API'et når responsen fra det foregående kallet returneres
-  - Det er kun det siste kallet som legges i køen som skal sendes til API'et når responsen fra det foregående kallet returneres, resten kan forkastes.
-*/
 
 describe('Estimated Calls for Stop Place', () => {    
 
@@ -32,19 +24,6 @@ describe('Estimated Calls for Stop Place', () => {
         expect(fetchMock.calls('path:/journeyplanner/2.0/index/graphql').length).toBe(1)
         fetchMock.restore();
     })
-
-    // it('throws error on 500', async () => {
-
-    //     fetchMock.mock('path:/journeyplanner/2.0/index/graphql', (url, options) => {
-    //         return delay(1000).then(() => {
-    //             return 500
-    //         })
-    //     })
-
-    //     await api.getEstimatedCallsForStop();
-    //     expect(fetchMock.calls('path:/journeyplanner/2.0/index/graphql').length).toBe(1)
-    //     fetchMock.restore();
-    // })
 
 })
 
